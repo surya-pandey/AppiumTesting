@@ -2,7 +2,7 @@
 
 node {
       
-     stage ('SCM check'){
+     stage ('SCM checkout'){
      git 'https://github.com/surya-pandey/AppiumTesting.git'
      }
 
