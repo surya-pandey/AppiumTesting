@@ -1,36 +1,28 @@
-pipeline {
-    agent any
+#!/usr/bin/env groovy
 
-    stages {
-        stage ('Compile Stage') {
+node {
 
-            steps {
-                withMaven(maven : 'maven_3_6_3') {
-                    sh 'mvn clean'
-                }
-            }
-        }
+    stage('check java') {
+        sh "java -version"
+    }
 
-        stage ('Validation  Stage') {
+    stage('clean') {
+        sh "chmod +x mvnw"
+        sh "./mvnw clean"
+    }
+    
+    stage('validate') {
+        sh "chmod +x mvnw"
+        sh "./mvnw validate"
+    }
+    stage('build') {
+        sh "chmod +x mvnw"
+        sh "./mvnw build"
+    }
 
-            steps {
-                withMaven(maven : 'maven_3_6_3') {
-                    sh 'mvn validate'
-                }
-            }
-        }
-
-
-        stage ('Build Stage') {
-            steps {
-                withMaven(maven : 'maven_3_6_3') {
-                    sh 'mvn build'
-                }
-            }
-        }
         stage ('Test Stage') {
             steps {
-                withMaven(maven : 'maven_3_6_4') {
+                withMaven(maven : 'maven_6_3_3') {
                     sh 'mvn test'
                 }
             }
@@ -44,7 +36,7 @@ pipeline {
         }
          stage ('install Stage') {
             steps {
-                withMaven(maven : 'maven_3_6_3') {
+                withMaven(maven : 'maven_6_3_3') {
                     sh 'mvn install'
                 }
             }
