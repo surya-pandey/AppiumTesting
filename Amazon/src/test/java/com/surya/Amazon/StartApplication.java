@@ -38,7 +38,7 @@ public class StartApplication {
 	  capabilities.setCapability("appPackage", "in.amazon.mShop.android.shopping");
 	// This package name of your app (you can get it from apk info app)
 		capabilities.setCapability("appActivity","com.amazon.mShop.splashscreen.StartupActivity"); // This is Launcher activity of your app (you can get it from apk info app)
-	//Create RemoteWebDriver instance and connect to the Appium server
+	//Create RemoteWebDriver instance 
 	 //It will launch the Calculator App in Android Device using the configurations specified in Desired Capabilities
 		driver = new AppiumDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
