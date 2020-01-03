@@ -1,14 +1,14 @@
 node {
     stage ('clean'){
-         sh "./mvnw clean"
+         sh label: 'clean', script: 'mvn clean'
     }
       stage('validate') {
         sh "chmod +x mvnw"
-        sh "./mvnw validate"
+        sh label: 'validate', script: 'mvn validate'
     }
     stage('build') {
         sh "chmod +x mvnw"
-        sh "./mvnw build"
+        sh label: 'build', script: 'mvn build'
     }
     stage('test Stage')
        steps{
