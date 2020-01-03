@@ -1,17 +1,8 @@
-#!/usr/bin/env groovy
-
 node {
-
-    stage('check java') {
-        sh "java -version"
+    stage ('clean'){
+         sh "./mvnw clean"
     }
-
-    stage('clean') {
-        sh "chmod +x mvnw"
-        sh "./mvnw clean"
-    }
-    
-    stage('validate') {
+      stage('validate') {
         sh "chmod +x mvnw"
         sh "./mvnw validate"
     }
@@ -19,27 +10,22 @@ node {
         sh "chmod +x mvnw"
         sh "./mvnw build"
     }
-
-        stage ('Test Stage') {
-            steps {
-                withMaven(maven : 'maven_6_3_3') {
-                    sh 'mvn test'
-                }
-            }
-        }
-        stage ('package Stage') {
-            steps {
-                withMaven(maven : 'maven_3_6_3') {
-                    sh 'mvn package'
-                }
-            }
-        }
-         stage ('install Stage') {
-            steps {
+    stage('test Stage')
+       steps{
+           withMaven(maven : 'maven_6_3_3') {
+                              sh "mvn test"
+                          }
+    }
+    stage('install stage'){
+           steps {
                 withMaven(maven : 'maven_6_3_3') {
                     sh 'mvn install'
                 }
             }
-        }
+     
     }
+   
+
+
+        
 }
